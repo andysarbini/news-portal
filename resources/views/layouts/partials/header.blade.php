@@ -113,10 +113,14 @@
                 </ul>
             </li>
             {{-- logout --}}
-            <li>
-                <a href="login.html">
-                    <i class="fa fa-sign-out"></i> Log out
-                </a>
+            <li class="nav-item">
+                <a class="nav-link" href="#" 
+                    onclick="document.querySelector('#form-logout').submit()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>  
+                <form action="{{ route('logout') }}" method="post" id="form-logout">
+                    @csrf
+                </form>
             </li>
             <li>
                 <a class="right-sidebar-toggle">
