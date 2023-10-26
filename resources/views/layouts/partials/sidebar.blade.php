@@ -28,7 +28,7 @@
                 <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Master</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     @if (auth()->user()->hasRole('admin'))
-                        <li><a href="graph_flot.html">Kategori</a></li>
+                        <li><a href="{{ route('category.index') }}">Kategori</a></li>
                     @endif
                         <li><a href="graph_morris.html">Artikel</a></li>
                         <li><a href="graph_rickshaw.html">Gallery</a></li>

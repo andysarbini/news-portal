@@ -53,16 +53,16 @@
  @push('scripts')
     <script>
         $(document).ready(function() {
-            // setTimeout(function() {
-            //     toastr.options = {
-            //         closeButton: true,
-            //         progressBar: true,
-            //         showMethod: 'slideDown',
-            //         timeOut: 4000
-            //     };
-            //     toastr.success('Dashboard News Portal', 'Welcome Admin');
+            setTimeout(function() {
+                toastr.options = {
+                    closeButton: true,
+                    progressBar: true,
+                    showMethod: 'slideDown',
+                    timeOut: 4000
+                };
+                toastr.success('Dashboard News Portal', 'Welcome Admin');
 
-            // }, 1300);
+            }, 1300);
 
             var d1 = [[1262304000000, 6], [1264982400000, 3057], [1267401600000, 20434], [1270080000000, 31982], [1272672000000, 26602], [1275350400000, 27826], [1277942400000, 24302], [1280620800000, 24237], [1283299200000, 21004], [1285891200000, 12144], [1288569600000, 10577], [1291161600000, 10295]];
             var d2 = [[1262304000000, 5], [1264982400000, 200], [1267401600000, 1605], [1270080000000, 6129], [1272672000000, 11643], [1275350400000, 19055], [1277942400000, 30062], [1280620800000, 39197], [1283299200000, 37000], [1285891200000, 27000], [1288569600000, 21000], [1291161600000, 17000]];

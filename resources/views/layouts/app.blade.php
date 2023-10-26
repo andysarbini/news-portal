@@ -12,7 +12,8 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    {{-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> --}}
 
     <title>{{ config('app.name') }} | @yield('title')</title>
 
@@ -23,12 +24,16 @@
     <link href="{{ asset('/inspinia/plugins/css/plugins/toastr/toastr.min.css') }}" rel="stylesheet">
 
     <!-- Gritter -->
-    <link href="{{ asset('/inspinia/plugins/js/plugins/gritter/jquery.gritter.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('/inspinia/plugins/js/plugins/gritter/jquery.gritter.css') }}" rel="stylesheet"> --}}
+    
+    <!-- Datatables -->
+    <link href="{{ asset('/inspinia/plugins/css/plugins/dataTables/datatables.min.css') }}" rel="stylesheet">
 
     <link href="{{ asset('/inspinia/plugins/css/animate.css') }}" rel="stylesheet">
     <link href="{{ asset('/inspinia/plugins/css/style.css') }}" rel="stylesheet">
 
     @stack('css')
+    
 
 </head>
 
@@ -224,8 +229,6 @@
             </div>
         </div>
 
-        
-
     </div>
 
     <!-- Mainly scripts -->
@@ -234,7 +237,7 @@
     <script src="{{ asset('/inspinia/plugins/js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
     <script src="{{ asset('/inspinia/plugins/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
 
-    <!-- Flot -->
+    {{-- <!-- Flot -->
     <script src="{{ asset('/inspinia/plugins/js/plugins/flot/jquery.flot.js') }}"></script>
     <script src="{{ asset('/inspinia/plugins/js/plugins/flot/jquery.flot.tooltip.min.js') }}"></script>
     <script src="{{ asset('/inspinia/plugins/js/plugins/flot/jquery.flot.spline.js') }}"></script>
@@ -243,20 +246,25 @@
 
     <!-- Peity -->
     <script src="{{ asset('/inspinia/plugins/js/plugins/peity/jquery.peity.min.js') }}"></script>
-    <script src="{{ asset('/inspinia/plugins/js/demo/peity-demo.js') }}"></script>
+    <script src="{{ asset('/inspinia/plugins/js/demo/peity-demo.js') }}"></script> --}}
 
+    <!-- Datatables -->
+    <script src="{{ asset('/inspinia/plugins/js/plugins/dataTables/datatables.min.js') }}"></script>
     <!-- Custom and plugin javascript -->
     <script src="{{ asset('/inspinia/plugins/js/inspinia.js') }}"></script>
     <script src="{{ asset('/inspinia/plugins/js/plugins/pace/pace.min.js') }}"></script>
 
-    <!-- jQuery UI -->
-    <script src="{{ asset('/inspinia/plugins/js/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('/js/custom.js') }}"></script>
+
+    {{-- <!-- jQuery UI -->
+    <script src="{{ asset('/inspinia/plugins/js/plugins/jquery-ui/jquery-ui.min.js') }}"></script> --}}
 
     <!-- Toastr -->
     <script src="{{ asset('/inspinia/plugins/js/plugins/toastr/toastr.min.js') }}"></script>
+    
+    
 
 {{-- flot --}}
     @stack('scripts')
-
 </body>
 </html>
