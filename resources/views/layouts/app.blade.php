@@ -1,262 +1,144 @@
-<!--
-*
-*  INSPINIA - Responsive Admin Theme
-*  version 2.7
-*
--->
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    
+    {{-- <title>{{ $setting->company_name }} - @yield('title')</title> --}}
+    <title>News Portal - @yield('title')</title>
 
-    <title>{{ config('app.name') }} | @yield('title')</title>
+    <link rel="icon" href="{{ url($setting->path_image ?? '') }}" type="image/*">
 
-    <link href="{{ asset('/inspinia/plugins/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('/inspinia/plugins/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{ asset('/AdminLTE/plugins/fontawesome-free/css/all.min.css') }}">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    
+    <!-- iCheck -->
+    <link rel="stylesheet" href="{{ asset('/AdminLTE/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="{{ asset('/AdminLTE/plugins/jqvmap/jqvmap.min.css') }}">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="{{ asset('/AdminLTE/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
+    
+    @stack('css_vendor')
 
-    <!-- Toastr style -->
-    <link href="{{ asset('/inspinia/plugins/css/plugins/toastr/toastr.min.css') }}" rel="stylesheet">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{ asset('/AdminLTE/dist/css/adminlte.min.css') }}">
 
-    <!-- Gritter -->
-    <link href="{{ asset('/inspinia/plugins/js/plugins/gritter/jquery.gritter.css') }}" rel="stylesheet">
-
-    <link href="{{ asset('/inspinia/plugins/css/animate.css') }}" rel="stylesheet">
-    <link href="{{ asset('/inspinia/plugins/css/style.css') }}" rel="stylesheet">
+    <style>
+        .note-editor {
+            margin-bottom: 0;
+        }
+        .note-editor.is-invalid {
+            border-color: var(--danger);
+        }
+        .nav-sidebar .nav-header {
+            font-size: .6rem;
+            font-weight: bold;
+            color: #888;
+        }
+    </style>
 
     @stack('css')
-
 </head>
 
-<body>
-   
-    <div id="wrapper">
-        {{-- sidebar --}}
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+
+        <!-- Preloader -->
+        <div class="preloader flex-column justify-content-center align-items-center">
+            <img class="animation__shake" src="{{ asset('/AdminLTE/dist/img/AdminLTELogo.png') }}" alt="AdminLTELogo"
+                height="60" width="60">
+        </div>
+
+        <!-- Navbar -->
+        @includeIf('layouts.partials.header')
+        <!-- /.navbar -->
+
+        <!-- Main Sidebar Container -->
         @includeIf('layouts.partials.sidebar')
 
-        {{-- content --}}
-        <div id="page-wrapper" class="gray-bg dashbard-1">
-            {{-- header-balok-atas --}}
-            @includeIf('layouts.partials.header')
-        
-            {{-- content-section-1 welcome amelia
-            <div class="row  border-bottom white-bg dashboard-header">
-                    <div class="col-md-3">
-                        <h2>Welcome Amelia</h2>
-                        <small>You have 42 messages and 6 notifications.</small>
-                        <ul class="list-group clear-list m-t">
-                            <li class="list-group-item fist-item">
-                                <span class="pull-right">
-                                    09:00 pm
-                                </span>
-                                <span class="label label-success">1</span> Please contact me
-                            </li>
-                            <li class="list-group-item">
-                                <span class="pull-right">
-                                    10:16 am
-                                </span>
-                                <span class="label label-info">2</span> Sign a contract
-                            </li>
-                            <li class="list-group-item">
-                                <span class="pull-right">
-                                    08:22 pm
-                                </span>
-                                <span class="label label-primary">3</span> Open new shop
-                            </li>
-                            <li class="list-group-item">
-                                <span class="pull-right">
-                                    11:06 pm
-                                </span>
-                                <span class="label label-default">4</span> Call back to Sylvia
-                            </li>
-                            <li class="list-group-item">
-                                <span class="pull-right">
-                                    12:00 am
-                                </span>
-                                <span class="label label-primary">5</span> Write a letter to Sandra
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="flot-chart dashboard-chart">
-                            <div class="flot-chart-content" id="flot-dashboard-chart"></div>
-                        </div>
-                        <div class="row text-left">
-                            <div class="col-xs-4">
-                                <div class=" m-l-md">
-                                <span class="h4 font-bold m-t block">$ 406,100</span>
-                                <small class="text-muted m-b block">Sales marketing report</small>
-                                </div>
-                            </div>
-                            <div class="col-xs-4">
-                                <span class="h4 font-bold m-t block">$ 150,401</span>
-                                <small class="text-muted m-b block">Annual sales revenue</small>
-                            </div>
-                            <div class="col-xs-4">
-                                <span class="h4 font-bold m-t block">$ 16,822</span>
-                                <small class="text-muted m-b block">Half-year revenue margin</small>
-                            </div>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">@yield('title')</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                @section('breadcrumb')
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                @show
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
 
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="statistic-box">
-                        <h4>
-                            Project Beta progress
-                        </h4>
-                        <p>
-                            You have two project with not compleated task.
-                        </p>
-                            <div class="row text-center">
-                                <div class="col-lg-6">
-                                    <canvas id="doughnutChart2" width="80" height="80" style="margin: 18px auto 0"></canvas>
-                                    <h5 >Kolter</h5>
-                                </div>
-                                <div class="col-lg-6">
-                                    <canvas id="doughnutChart" width="80" height="80" style="margin: 18px auto 0"></canvas>
-                                    <h5 >Maxtor</h5>
-                                </div>
-                            </div>
-                            <div class="m-t">
-                                <small>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
-                            </div>
-                        </div>
-                    </div>
-            </div> --}}
-
+            <!-- Main content -->
             <section class="content">
-                <div class="row">
+                <div class="container-fluid">
                     @yield('content')
-                    
                 </div>
+                <!-- /.container-fluid -->
             </section>
-
-            {{-- content-section-2 --}}
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="wrapper wrapper-content">
-                        <div class="row">                             
-                            
-                        </div>
-                    </div>
-
-                    {{-- footer --}}
-                    @includeIf('layouts.partials.footer')
-                    
-                </div>
-            </div>
+            <!-- /.content -->
         </div>
-
-        {{-- bottom-right-messages-content --}}
-        <div class="small-chat-box fadeInRight animated">
-            <div class="heading" draggable="true">
-                <small class="chat-date pull-right">
-                    02.19.2015
-                </small>
-                Small chat
-            </div>
-            <div class="content">
-                <div class="left">
-                    <div class="author-name">
-                        Monica Jackson <small class="chat-date">
-                        10:02 am
-                    </small>
-                    </div>
-                    <div class="chat-message active">
-                        Lorem Ipsum is simply dummy text input.
-                    </div>
-                </div>
-                <div class="right">
-                    <div class="author-name">
-                        Mick Smith
-                        <small class="chat-date">
-                            11:24 am
-                        </small>
-                    </div>
-                    <div class="chat-message">
-                        Lorem Ipsum is simpl.
-                    </div>
-                </div>
-                <div class="left">
-                    <div class="author-name">
-                        Alice Novak
-                        <small class="chat-date">
-                            08:45 pm
-                        </small>
-                    </div>
-                    <div class="chat-message active">
-                        Check this stock char.
-                    </div>
-                </div>
-                <div class="right">
-                    <div class="author-name">
-                        Anna Lamson
-                        <small class="chat-date">
-                            11:24 am
-                        </small>
-                    </div>
-                    <div class="chat-message">
-                        The standard chunk of Lorem Ipsum
-                    </div>
-                </div>
-                <div class="left">
-                    <div class="author-name">
-                        Mick Lane
-                        <small class="chat-date">
-                            08:45 pm
-                        </small>
-                    </div>
-                    <div class="chat-message active">
-                        I belive that. Lorem Ipsum is simply dummy text.
-                    </div>
-                </div>
-            </div>
-            <div class="form-chat">
-                <div class="input-group input-group-sm">
-                    <input type="text" class="form-control">
-                    <span class="input-group-btn"> <button
-                        class="btn btn-primary" type="button">Send
-                </button> </span></div>
-            </div>
-        </div>
-
         
+        <!-- /.content-wrapper -->
+        @includeIf('layouts.partials.footer')
 
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
     </div>
+    <!-- ./wrapper -->
 
-    <!-- Mainly scripts -->
-    <script src="{{ asset('/inspinia/plugins/js/jquery-3.1.1.min.js') }}"></script>
-    <script src="{{ asset('/inspinia/plugins/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('/inspinia/plugins/js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
-    <script src="{{ asset('/inspinia/plugins/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
+    <!-- jQuery -->
+    <script src="{{ asset('/AdminLTE/plugins/jquery/jquery.min.js') }}"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="{{ asset('/AdminLTE/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button)
+    </script>
+    <!-- Bootstrap 4 -->
+    <script src="{{ asset('/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <!-- ChartJS -->
+    <script src="{{ asset('/AdminLTE/plugins/chart.js/Chart.min.js') }}"></script>
+    <!-- Sparkline -->
+    <script src="{{ asset('/AdminLTE/plugins/sparklines/sparkline.js') }}"></script>
+    <!-- JQVMap -->
+    <script src="{{ asset('/AdminLTE/plugins/jqvmap/jquery.vmap.min.js') }}"></script>
+    <script src="{{ asset('/AdminLTE/plugins/jqvmap/maps/jquery.vmap.usa.js') }}"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="{{ asset('/AdminLTE/plugins/jquery-knob/jquery.knob.min.js') }}"></script>
+    <!-- daterangepicker -->
+    <script src="{{ asset('/AdminLTE/plugins/moment/moment.min.js') }}"></script>
+    
+    <!-- overlayScrollbars -->
+    <script src="{{ asset('/AdminLTE/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 
-    <!-- Flot -->
-    <script src="{{ asset('/inspinia/plugins/js/plugins/flot/jquery.flot.js') }}"></script>
-    <script src="{{ asset('/inspinia/plugins/js/plugins/flot/jquery.flot.tooltip.min.js') }}"></script>
-    <script src="{{ asset('/inspinia/plugins/js/plugins/flot/jquery.flot.spline.js') }}"></script>
-    <script src="{{ asset('/inspinia/plugins/js/plugins/flot/jquery.flot.resize.js') }}"></script>
-    <script src="{{ asset('/inspinia/plugins/js/plugins/flot/jquery.flot.pie.js') }}"></script>
+    @stack('scripts_vendor')
 
-    <!-- Peity -->
-    <script src="{{ asset('/inspinia/plugins/js/plugins/peity/jquery.peity.min.js') }}"></script>
-    <script src="{{ asset('/inspinia/plugins/js/demo/peity-demo.js') }}"></script>
+    <!-- AdminLTE App -->
+    <script src="{{ asset('/AdminLTE/dist/js/adminlte.js') }}"></script>
+    <script src="{{ asset('/js/custom.js') }}"></script>
 
-    <!-- Custom and plugin javascript -->
-    <script src="{{ asset('/inspinia/plugins/js/inspinia.js') }}"></script>
-    <script src="{{ asset('/inspinia/plugins/js/plugins/pace/pace.min.js') }}"></script>
-
-    <!-- jQuery UI -->
-    <script src="{{ asset('/inspinia/plugins/js/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
-
-    <!-- Toastr -->
-    <script src="{{ asset('/inspinia/plugins/js/plugins/toastr/toastr.min.js') }}"></script>
-
-{{-- flot --}}
+    <x-toast />
     @stack('scripts')
-
 </body>
+
 </html>

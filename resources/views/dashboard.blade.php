@@ -1,189 +1,396 @@
 @extends('layouts.app')
 
 @section('title', 'Dashboard')
+@section('breadcrumb')
+    @parent
+    <li class="breadcrumb-item active">Dashboard</li>
+@endsection
+
+@push('css')
+<link rel="stylesheet" href="{{ asset('/AdminLTE/plugins/daterangepicker/daterangepicker.css') }}">
+@endpush
+
+@section('content')
+<!-- Small boxes (Stat box) -->
+<div class="row">
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-info">
+            <div class="inner">
+                {{-- <h3>{{ format_uang($jumlahKategori) }}</h3> --}}
+                <h3>40</h3>
+
+                <p>Kategori</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-cube"></i>
+            </div>
+            <a href="{{ route('category.index') }}" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-info">
+            <div class="inner">
+                {{-- <h3>{{ format_uang($jumlahProjek) }}</h3> --}}
+                <h3>30</h3>
+
+                <p>Projek</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-folder"></i>
+            </div>
+            {{-- <a href="{{ route('campaign.index') }}" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a> --}}
+            <a href="" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-danger">
+            <div class="inner">
+                {{-- <h3>{{ format_uang($jumlahProjekPending) }}</h3> --}}
+                <h3>34</h3>
+
+                <p>Projek Pending</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-folder"></i>
+            </div>
+            <a href="" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-danger">
+            <div class="inner">
+                {{-- <h3>{{ format_uang($jumlahKontakMasuk) }}</h3> --}}
+                <h3>17</h3>
+
+                <p>Kontak Masuk Baru</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-envelope"></i>
+            </div>
+            {{-- <a href="{{ route('contact.index', ['date' => date('Y-m-d')]) }}" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a> --}}
+            <a href="" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+</div>
+
+<div class="row">
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+            <div class="inner">
+                {{-- <h3>Rp. {{ format_uang($totalDonasi) }}</h3> --}}
+                <h3>50</h3>
+
+                <p>Total Donasi</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-donate"></i>
+            </div>
+            {{-- <a href="{{ route('donation.index', ['status' => 'confirmed']) }}" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a> --}}
+            <a href="" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-danger">
+            <div class="inner">
+                {{-- <h3>{{ format_uang($jumlahDonasiBelumDikonfirmasi) }}</h3> --}}
+                <h3>89</h3>
+
+                <p>Donasi Belum Dikonfirmasi</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-donate"></i>
+            </div>
+            {{-- <a href="{{ route('donation.index', ['status' => 'not confirmed']) }}" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a> --}}
+            <a href="" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-primary">
+            <div class="inner">
+                {{-- <h3>{{ format_uang($jumlahDonasiDikonfirmasi) }}</h3> --}}
+                <h3>78</h3>
+
+                <p>Donasi Dikonfirmasi</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-donate"></i>
+            </div>
+            {{-- <a href="{{ route('donation.index', ['status' => 'confirmed']) }}" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a> --}}
+            <a href="" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+            <div class="inner">
+                {{-- <h3>Rp. {{ format_uang($totalProjekDicairkan) }}</h3> --}}
+                <h3>Rp. 200</h3>
+
+                <p>Total Dicairkan</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-hand-holding-usd"></i>
+            </div>
+            {{-- <a href="{{ route('cashout.index', ['status' => 'success']) }}" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a> --}}
+            <a href="" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+</div>
+
+<!-- /.row -->
+<div class="row">
+    <!-- Left col -->
+    <section class="col-lg-12 connectedSortable">
+        <!-- Custom tabs (Charts with tabs)-->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fas fa-chart-line mr-1"></i>
+                    Laporan donasi dan pencairan {{ date('Y') }}
+                </h3>
+            </div><!-- /.card-header -->
+            <div class="card-body text-center pb-0">
+                {{-- {{ tanggal_indonesia(date('Y-01-01')) }} s/d {{ tanggal_indonesia(date('Y-12-31')) }} --}}
+                {{ date('Y-01-01') }} s/d {{ date('Y-12-31') }}
+            </div>
+            <div class="card-body pt-0">
+                <canvas id="revenue-chart-canvas" height="300" style="height: 300px;"></canvas>
+            </div><!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </section>
+    <!-- /.Left col -->
     
- @section('content')
-    <div class="col-lg-6">
-        <div class="widget navy-bg no-padding">
-            <div class="p-m">
-                <h1 class="m-xs">$ 1,540</h1>
+    <div class="col-lg-7">
+        <div class="card">
+            <div class="card-header border-transparent">
+                <h3 class="card-title">10 projek populer bulan ini</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table m-0">
+                        <thead>
+                            <tr>
+                                <th width="5%">#</th>
+                                <th>Judul</th>
+                                <th>Status</th>
+                                <th>Jumlah Donasi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{-- @forelse ($projekPopuler as $key => $item)
+                            <tr>
+                                <td><a href="">{{ $key+1 }}</a></td>
+                                <td>{{ $item->title }}</td>
+                                <td><span class="badge badge-{{ $item->statusColor() }}">{{ $item->status }}</span></td>
+                                <td>4x</td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="4">Tidak tersedia</td>
+                            </tr>
+                            @endforelse --}}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.table-responsive -->
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
 
-                <h3 class="font-bold no-margins">
-                    Annual income
+        <div class="card">
+          <div class="card-header border-transparent">
+              <h3 class="card-title">Top 10 donatur bulan ini</h3>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body p-0">
+              <div class="table-responsive">
+                  <table class="table m-0">
+                        <thead>
+                            <tr>
+                                <th width="5%">#</th>
+                                <th>Nama</th>
+                                <th>Jumlah Donasi</th>
+                                <th>Jumlah Projek</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                {{-- @forelse ($topDonatur as $key => $item)
+                                <tr>
+                                    <td><a href="{{ route('donatur.index', ['email' => $item->email]) }}">{{ $key+1 }}</a></td>
+                                    <td>
+                                        {{ $item->name }} 
+                                        <br> 
+                                        <a href="mailto:{{ $item->email }}" target="_blank">{{ $item->email }}</a>
+                                    </td>
+                                    <td>4x</td>
+                                    <td>6x</td>
+                                </tr>
+                            @empty
+                            <tr>
+                                <td colspan="4">Tidak tersedia</td>
+                            </tr>
+                            @endforelse --}}
+                        </tbody>
+                  </table>
+              </div>
+              <!-- /.table-responsive -->
+          </div>
+          <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+    </div>
+    <!-- right col (We are only adding the ID to make the widgets sortable)-->
+    <section class="col-lg-5 connectedSortable">
+
+        <!-- Card -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fas fa-chart-pie mr-1"></i>
+                    Pengguna bulan ini
                 </h3>
-                <small>Income form project Alpha.</small>
             </div>
-            <div class="flot-chart">
-                <div class="flot-chart-content" id="flot-chart1"></div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3">
-        <div class="widget lazur-bg no-padding">
-            <div class="p-m">
-                <h1 class="m-xs">$ 210,660</h1>
-
-                <h3 class="font-bold no-margins">
-                    Monthly income
-                </h3>
-                <small>Income form project Beta.</small>
-            </div>
-            <div class="flot-chart">
-                <div class="flot-chart-content" id="flot-chart2"></div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <canvas id="sales-chart-canvas" height="150" style="height: 150px;"></canvas>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="chart-legend clearfix">
+                            <li><i class="far fa-circle text-danger"></i> Donatur</li>
+                            <li><i class="far fa-circle text-success"></i> Subscriber</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-lg-3">
-        <div class="widget yellw-bg no-padding">
-            <div class="p-m">
-                <h1 class="m-xs">$ 50,992</h1>
+        <!-- /.card -->
 
-                <h3 class="font-bold no-margins">
-                    Half-year revenue margin
-                </h3>
-                <small>Sales marketing.</small>
+        <div class="card">
+            <div class="card-header">
+              {{-- <h3 class="card-title">Notifikasi terbaru <span class="badge badge-danger">{{ $countNotifikasi }}</span></h3> --}}
+              <h3 class="card-title">Notifikasi terbaru <span class="badge badge-danger">32</span></h3>
             </div>
-            <div class="flot-chart">
-                <div class="flot-chart-content" id="flot-chart3"></div>
+            <!-- /.card-header -->
+            <div class="card-body p-0">
+              <ul class="products-list product-list-in-card pl-2 pr-2">
+                {{-- @foreach ($listNotifikasi as $key => $notifikasi)
+                    @foreach ($notifikasi as $item)
+                    <li class="item">
+                        <div class="product-info ml-1">
+                            <a href="{{ route("$key.index") }}" class="product-title">
+                                {{ $item->name ?? $item->email ?? $item->user->name ?? "" }}
+                                <span class="badge 
+                                @switch($key)
+                                    @case('donatur') badge-warning @break
+                                    @case('subscriber') badge-secondary @break
+                                    @case('contact') badge-info @break
+                                    @case('donation') badge-primary @break
+                                    @case('cashout') badge-success @break
+                                @endswitch
+                                float-right">{{ $key }} baru</span>
+                            </a>
+                            <span class="product-description">
+                                {{ now()->parse($item->created_at)->diffForHumans() }}
+                            </span>
+                        </div>
+                    </li>
+                    @endforeach
+                @endforeach --}}
+              </ul>
             </div>
-        </div>
-    </div>
- @endsection
+          </div>
+    </section>
+    <!-- right col -->
+</div>
+<!-- /.row (main row) -->
+@endsection
 
- @push('scripts')
-    <script>
-        $(document).ready(function() {
-            // setTimeout(function() {
-            //     toastr.options = {
-            //         closeButton: true,
-            //         progressBar: true,
-            //         showMethod: 'slideDown',
-            //         timeOut: 4000
-            //     };
-            //     toastr.success('Dashboard News Portal', 'Welcome Admin');
+@push('scripts_vendor')
+<script src="{{ asset('/AdminLTE/plugins/daterangepicker/daterangepicker.js') }}"></script>
+@endpush
 
-            // }, 1300);
+@push('scripts')
+{{-- <script>
+    var salesChartCanvas = document.getElementById('revenue-chart-canvas').getContext('2d')
+    var salesChartData = {
+        labels: @json($listBulan),
+        datasets: [{
+                label: 'Donasi',
+                backgroundColor: 'rgba(10, 123,255, .9)',
+                borderColor: 'rgba(10, 123, 255, .8)',
+                pointColor: '#3b8bba',
+                pointStrokeColor: 'rgba(10, 123, 255, 1)',
+                pointHighlightFill: '#fff',
+                pointHighlightStroke: 'rgba(10, 123, 255, 1)',
+                data: @json($listDonasi)
+            },
+            {
+                label: 'Pencairan',
+                backgroundColor: 'rgba(210, 214, 222, .9)',
+                borderColor: 'rgba(210, 214, 222, .8)',
+                pointColor: 'rgba(210, 214, 222, 1)',
+                pointStrokeColor: '#c1c7d1',
+                pointHighlightFill: '#fff',
+                pointHighlightStroke: 'rgba(220,220,220,1)',
+                data: @json($listPencairan)
+            }
+        ]
+    }
+    var salesChartOptions = {
+        maintainAspectRatio: false,
+        responsive: true,
+    }
 
-            var d1 = [[1262304000000, 6], [1264982400000, 3057], [1267401600000, 20434], [1270080000000, 31982], [1272672000000, 26602], [1275350400000, 27826], [1277942400000, 24302], [1280620800000, 24237], [1283299200000, 21004], [1285891200000, 12144], [1288569600000, 10577], [1291161600000, 10295]];
-            var d2 = [[1262304000000, 5], [1264982400000, 200], [1267401600000, 1605], [1270080000000, 6129], [1272672000000, 11643], [1275350400000, 19055], [1277942400000, 30062], [1280620800000, 39197], [1283299200000, 37000], [1285891200000, 27000], [1288569600000, 21000], [1291161600000, 17000]];
+    // This will get the first returned node in the jQuery collection.
+    // eslint-disable-next-line no-unused-vars
+    var salesChart = new Chart(salesChartCanvas, { // lgtm[js/unused-local-variable]
+        type: 'line',
+        data: salesChartData,
+        options: salesChartOptions
+    })
 
-            var data1 = [
-                { label: "Data 1", data: d1, color: '#17a084'},
-                { label: "Data 2", data: d2, color: '#127e68' }
-            ];
-            $.plot($("#flot-chart1"), data1, {
-                xaxis: {
-                    tickDecimals: 0
-                },
-                series: {
-                    lines: {
-                        show: true,
-                        fill: true,
-                        fillColor: {
-                            colors: [{
-                                opacity: 1
-                            }, {
-                                opacity: 1
-                            }]
-                        }
-                    },
-                    points: {
-                        width: 0.1,
-                        show: false
-                    }
-                },
-                grid: {
-                    show: false,
-                    borderWidth: 0
-                },
-                legend: {
-                    show: false
-                }
-            });
-
-            var data2 = [
-                { label: "Data 1", data: d1, color: '#19a0a1'}
-            ];
-            $.plot($("#flot-chart2"), data2, {
-                xaxis: {
-                    tickDecimals: 0
-                },
-                series: {
-                    lines: {
-                        show: true,
-                        fill: true,
-                        fillColor: {
-                            colors: [{
-                                opacity: 1
-                            }, {
-                                opacity: 1
-                            }]
-                        }
-                    },
-                    points: {
-                        width: 0.1,
-                        show: false
-                    }
-                },
-                grid: {
-                    show: false,
-                    borderWidth: 0
-                },
-                legend: {
-                    show: false
-                }
-            });
-
-            var data3 = [
-                { label: "Data 1", data: d1, color: '#fbbe7b'},
-                { label: "Data 2", data: d2, color: '#f8ac59' }
-            ];
-            $.plot($("#flot-chart3"), data3, {
-                xaxis: {
-                    tickDecimals: 0
-                },
-                series: {
-                    lines: {
-                        show: true,
-                        fill: true,
-                        fillColor: {
-                            colors: [{
-                                opacity: 1
-                            }, {
-                                opacity: 1
-                            }]
-                        }
-                    },
-                    points: {
-                        width: 0.1,
-                        show: false
-                    }
-                },
-                grid: {
-                    show: false,
-                    borderWidth: 0
-                },
-                legend: {
-                    show: false
-                }
-            });
-        });
-    </script>
- @endpush
-
-{{-- ori
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <x-jet-welcome />
-            </div>
-        </div>
-    </div>
-</x-app-layout> --}}
+    // Donut Chart
+    var pieChartCanvas = $('#sales-chart-canvas').get(0).getContext('2d')
+    var pieData = {
+        labels: @json($listNamaUser),
+        datasets: [{
+            data: @json($listJumlahUser),
+            backgroundColor: ['#f56954', '#00a65a']
+        }]
+    }
+    var pieOptions = {
+        legend: {
+            display: false
+        },
+        maintainAspectRatio: false,
+        responsive: true
+    }
+    // Create pie or douhnut chart
+    // You can switch between pie and douhnut using the method below.
+    // eslint-disable-next-line no-unused-vars
+    var pieChart = new Chart(pieChartCanvas, { // lgtm[js/unused-local-variable]
+        type: 'doughnut',
+        data: pieData,
+        options: pieOptions
+    })
+</script> --}}
+@endpush

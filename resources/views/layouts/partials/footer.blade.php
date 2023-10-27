@@ -1,9 +1,8 @@
-{{-- footer --}}
-<div class="footer">
-    <div class="pull-right">
-        10GB of <strong>250GB</strong> Free.
+<footer class="main-footer">
+    {{-- <strong>Copyright &copy; {{ date('Y') }} <a href="/">{{ $setting->company_name }}</a>.</strong> --}}
+    <strong>Copyright &copy; {{ date('Y') }} <a href="/">News Portal</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+        <b>Version</b> 1.1
     </div>
-    <div>
-        <strong>Copyright</strong> Example Company &copy; 2014-2017
-    </div>
-</div>
+</footer>
