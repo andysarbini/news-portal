@@ -28,6 +28,52 @@ class CategoryController extends Controller
         return view('category.index', compact('category'));
     }
 
+    // public function data(Request $request)
+    // {
+    //     $query = Category::with('role')
+    //         ->withCount('campaigns')
+    //         ->withSum([
+    //             'donations' => function ($query) {
+    //                 $query->where('status', 'confirmed');
+    //             }
+    //         ], 'nominal')
+    //         ->donatur()
+    //         ->when($request->has('email') && $request->email != "", function ($query) use ($request) {
+    //             $query->where('email', $request->email);
+    //         })
+    //         ->orderBy('name');
+
+    //     return datatables($query)
+    //         ->addIndexColumn()
+    //         ->editColumn('name', function ($query) {
+    //             return $query->name . '<br><a target="_blank" href="mailto:'. $query->email .'">'. $query->email .'</a>';
+    //         })
+    //         ->editColumn('path_image', function ($query) {
+    //             if (Storage::disk('public')->exists($query->path_image)) {
+    //                 return '<img src="'. Storage::disk('public')->url($query->path_image) .'" class="img-thumbnail">';
+    //             } else {
+    //                 return '<img src="'. asset('AdminLTE/dist/img/user1-128x128.jpg') .'" class="img-thumbnail">';
+    //             }
+    //         })
+    //         ->editColumn('campaigns_count', function ($query) {
+    //             return format_uang($query->campaigns_count);
+    //         })
+    //         ->editColumn('donations_sum_nominal', function ($query) {
+    //             return format_uang($query->donations_sum_nominal);
+    //         })
+    //         ->editColumn('created_at', function ($query) {
+    //             return tanggal_indonesia($query->created_at);
+    //         })
+    //         ->addColumn('action', function ($query) {
+    //             return '
+    //                 <button onclick="editForm(`'. route('donatur.show', $query->id) .'`)" class="btn btn-link text-primary"><i class="fas fa-pencil-alt"></i></button>
+    //                 <button class="btn btn-link text-danger" onclick="deleteData(`'. route('donatur.destroy', $query->id) .'`)"><i class="fas fa-trash-alt"></i></button>
+    //             ';
+    //         })
+    //         ->escapeColumns([])
+    //         ->make(true);
+    // }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -69,9 +115,11 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show($id)
     {
-        //
+        $category = Category::findOrFail($id);
+
+        return response()->json(['data' => $category]);
     }
 
     /**
@@ -99,25 +147,26 @@ class CategoryController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
+     * @param  $id
+     * @return \Illuminate\Http\Response
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    // public function destroy($id)
-    public function destroy(Category $category)
+    // public function destroy(Category $category)
+    public function destroy($id)
     {
-        // $category = Category::findOrFail($id);
-
-        // $category->delete();
-
-        // return response()->json(['data' => null, 'message' => 'Kategori berhasil dihapus']);
+        $category = Category::findOrFail($id);
 
         $category->delete();
 
-        return redirect()->route('category.index')
-            ->with([
-                'message' => 'Kategori berhasil dihapus',
-                'success' => true,
-            ]);
+        return response()->json(['data' => null, 'message' => 'Kategori berhasil dihapus']);
+
+        // $category->delete();
+
+        // return redirect()->route('category.index')
+        //     ->with([
+        //         'message' => 'Kategori berhasil dihapus',
+        //         'success' => true,
+        //     ]);
     }
 }

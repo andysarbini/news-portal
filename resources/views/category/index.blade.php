@@ -64,13 +64,13 @@
                                                 <td>{{ $item->name }}</td>
                                                 <td>{{ $item->slug }}</td>
                                                 <td>
-                                                    <form action="{{ route('category.destroy', $item->id) }}" method="post">
+                                                    <button class="btn btn-link text-primary" onclick="editForm(`{{ route('category.show', $item->id) }}`)"><i class="fa fa-pencil"></i></button>
+                                                    <button class="btn btn-link text-danger" onclick="return confirm('Yakin ingin menghapus data?')"><i class="fa fa-trash"></i></button>                                                   
+                                                    {{-- <form action="{{ route('category.destroy', $item->id) }}" method="post">
                                                         @csrf
-                                                        @method('delete')
-                            
+                                                        @method('delete')      
                                                         <a href="{{ route('category.edit', $item->id) }}" class="btn btn-link text-primary"><i class="fa fa-pencil"></i></a>
-                                                        <button class="btn btn-link text-danger" onclick="return confirm('Yakin ingin menghapus data?')"><i class="fa fa-trash"></i></button>
-                                                    </form>
+                                                    </form> --}}
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -109,6 +109,24 @@
 
             resetForm(`${modal} form`);
         }
+
+        function editForm(url, title = 'Edit') {
+        $.get(url)
+            .done(response => {
+                $(modal).modal('show');
+                $(`${modal} .modal-title`).text(title);
+                $(`${modal} form`).attr('action', url);
+                $(`${modal} [name=_method]`).val('put');
+
+                resetForm(`${modal} form`);
+                loopForm(response.data);
+
+            })
+            .fail(errors => {
+                alert('Tidak dapat menampilkan data');
+                return;
+            });
+    }
 
         function submitForm(originalForm) {
         $.post({

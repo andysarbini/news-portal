@@ -1,13 +1,13 @@
-<x-modal size="modal" data-backdrop="static" data-keyboard="false">
+<x-modal size="modal-lg">
     <x-slot name="title">
-        
+        Tambah
     </x-slot>
 
     @method('post')
 
     <div class="form-group">
         <label>Name</label> 
-        <input type="text" name="nama" placeholder="Nama kategori" id="nama" class="form-control">
+        <input type="text" name="name" placeholder="Nama kategori" id="name" class="form-control">
     </div>
 
     <x-slot name="footer">
