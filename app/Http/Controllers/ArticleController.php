@@ -31,24 +31,26 @@ class ArticleController extends Controller
             ->when($request->has('status') && $request->status != "", function ($query) use ($request) {
                 $query->where('status', $request->status);
             })
-            ->when(
-                $request->has('start_date') && 
-                $request->start_date != "" && 
-                $request->has('end_date') && 
-                $request->end_date != "", 
-                function ($query) use ($request) {
-                    $query->whereBetween('publish_date', $request->only('start_date', 'end_date'));
-                }
-            )
+            // ->when(
+            //     $request->has('start_date') && 
+            //     $request->start_date != "" && 
+            //     $request->has('end_date') && 
+            //     $request->end_date != "", 
+            //     function ($query) use ($request) {
+            //         $query->whereBetween('publish_date', $request->only('start_date', 'end_date'));
+            //     }
+            // )
             ->orderBy('publish_date', 'desc');
-
-        return datatables($query)
+            return datatables($query)
             ->addIndexColumn()
             ->editColumn('short_description', function ($query) {
                 return $query->title .'<br><small>'. $query->short_description .'</small>';
             })
             ->editColumn('image', function ($query) {
                 return '<img src="'. Storage::disk('public')->url($query->image) .'" class="img-thumbnail preview-path_image" width="150">';
+            })
+            ->addColumn('kategori', function ($query) {
+                return $query->kategori->name;
             })
             ->editColumn('status', function ($query) {
                 return '<span class="badge badge-'. $query->statusColor() .'">'. $query->status .'</span>';
@@ -77,7 +79,7 @@ class ArticleController extends Controller
 
                 return $text;
             })
-            ->rawColumns(['short_description', 'image', 'status', 'action'])
+            ->rawColumns(['short_description', 'image', 'kategori', 'status', 'action'])
             ->escapeColumns([])
             ->make(true);
     }
@@ -129,7 +131,7 @@ class ArticleController extends Controller
      */
     public function show(Request $request, Article $article)
     {
-        $article = $article->load('articles');
+        $article = $article->load('kategori');
 
         if (auth()->user()->hasRole('author') && $article->user_id != auth()->id()) {
             abort(404);
@@ -139,11 +141,11 @@ class ArticleController extends Controller
             return view('article.show', compact('article'));
         }
 
-        $article->publish_date = date('Y-m-d H:i', strtotime($article->publish_date));
-        $article->end_date = date('Y-m-d H:i', strtotime($article->end_date));
-        $article->goal = format_uang($article->goal);
+        // $article->publish_date = date('Y-m-d H:i', strtotime($article->publish_date));
+        // $article->end_date = date('Y-m-d H:i', strtotime($article->end_date));
+        // $article->goal = format_uang($article->goal);
         $article->categories = $article->category_article;
-        $article->path_image = Storage::disk('public')->url($article->path_image);
+        $article->path_image = Storage::disk('public')->url($article->image);
 
         return response()->json(['data' => $article]);
     }

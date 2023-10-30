@@ -29,7 +29,7 @@
                     </select>
                 </div>
 
-                <div class="d-flex">
+                {{-- <div class="d-flex">
                     <div class="form-group mx-3">
                         <label for="start_date2">Tanggal Awal</label>
                         <div class="input-group datepicker" id="start_date2" data-target-input="nearest">
@@ -48,7 +48,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
+
             </div>
 
             <x-table>
@@ -56,6 +57,7 @@
                     <th width="5%">No</th>
                     <th>Deskripsi Singkat</th>
                     <th>Gambar</th>
+                    <th>Kategori</th>
                     <th>Status</th>
                     <th>Author</th>
                     <th width="15%"><i class="fas fa-cog"></i></th>
@@ -94,6 +96,7 @@
             {data: 'DT_RowIndex', searchable: false, sortable: false},
             {data: 'short_description'},
             {data: 'image', searchable: false, sortable: false},
+            {data: 'kategori', searchable: false, sortable: false},
             {data: 'status', searchable: false, sortable: false},
             {data: 'author', searchable: false},
             {data: 'action', searchable: false, sortable: false},
@@ -128,17 +131,17 @@
                 resetForm(`${modal} form`);
                 loopForm(response.data);
 
-                let selectedCategories = [];
-                response.data.categories.forEach(item => {
-                    selectedCategories.push(item.id);
-                });
+                // let selectedCategories = [];
+                // response.data.categories.forEach(item => {
+                //     selectedCategories.push(item.id);
+                // });
 
-                $('#categories')
-                    .val(selectedCategories)
-                    .trigger('change');
+                // $('#categories')
+                //     .val(selectedCategories)
+                //     .trigger('change');
             })
             .fail(errors => {
-                alert('Tidak dapat menampilkan data');
+                alert('Edit Tidak dapat menampilkan data');
                 return;
             });
     }

@@ -8,11 +8,21 @@ class Article extends Model
 {
     use HasFactory;
 
-    public function category_article()
+    public function kategori()
     {
-        return $this->belongsToMany(Category::class, 'category_article');
+        return $this->belongsTo(Category::class, 'category', 'id');
     }
 
+    // public function role()
+    // {
+    //     return $this->hasOne(Role::class, 'id', 'role_id');
+    // }
+
+    // public function category()
+    // {
+    //     return $this->hasOne(Category::class, 'category', 'id');
+    // }
+    
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
