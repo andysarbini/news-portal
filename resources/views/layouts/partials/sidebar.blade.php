@@ -53,14 +53,14 @@
                 @else
                 <li class="nav-header">MASTER</li>
                 @endif
-                @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('donatur'))
+                @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('author'))
                 <li class="nav-item">
-                    {{-- <a href="{{ route('campaign.index') }}" class="nav-link {{ request()->is('admin/campaign*') ? 'active' : '' }}">
+                    <a href="{{ route('article.index') }}" class="nav-link {{ request()->is('admin/article*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-folder"></i>
                         <p>
-                            Projek
+                            Article
                         </p>
-                    </a> --}}
+                    </a>
                 </li>
                 <li class="nav-header">REFERENSI</li>
                 @if (auth()->user()->hasRole('admin'))

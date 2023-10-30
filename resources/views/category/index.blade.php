@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('title', 'Kategori')
-{{-- @section('breadcrumb')
+@section('breadcrumb')
     @parent
     <li class="breadcrumb-item active">Kategori</li>
-@endsection --}}
+@endsection
 
 @section('content')
 <div class="row">

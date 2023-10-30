@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\{
+    ArticleController,
     DashboardController,
     SettingController,
     CategoryController
@@ -46,6 +47,11 @@ Route::group([
         Route::get('/setting', [SettingController::class, 'index'])
             ->name('setting.index');
     });
+        Route::get('/article/data', [ArticleController::class, 'data'])
+            ->name('article.data');
+        Route::resource('/article', ArticleController::class);
+        Route::put('/article/{id}/update_status', [ArticleController::class, 'updateStatus'])
+            ->name('article.update_status');
     
     Route::group([
         'middleware' => 'role:author'
