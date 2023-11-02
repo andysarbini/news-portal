@@ -41,27 +41,35 @@
                     </a>
                 </li>
                 @if (auth()->user()->hasRole('admin'))
-                <li class="nav-header">MASTER</li>
-                <li class="nav-item">
-                    <a href="{{ route('category.index') }}" class="nav-link {{ request()->is('admin/category*') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-cube"></i>
-                        <p>
-                            Kategori
-                        </p>
-                    </a>
-                </li>
+                    <li class="nav-header">MASTER</li>
+                    <li class="nav-item">
+                        <a href="{{ route('category.index') }}" class="nav-link {{ request()->is('admin/category*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-list"></i>
+                            <p>
+                                Kategori
+                            </p>
+                        </a>
+                    </li>
                 @else
-                <li class="nav-header">MASTER</li>
+                    <li class="nav-header">MASTER</li>
                 @endif
                 @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('author'))
-                <li class="nav-item">
-                    <a href="{{ route('article.index') }}" class="nav-link {{ request()->is('admin/article*') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-folder"></i>
-                        <p>
-                            Article
-                        </p>
-                    </a>
-                </li>
+                    <li class="nav-item">
+                        <a href="{{ route('article.index') }}" class="nav-link {{ request()->is('admin/article*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-file"></i>
+                            <p>
+                                Article
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('gallery.index') }}" class="nav-link {{ request()->is('admin/gallery*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-image"></i>
+                            <p>
+                                Gallery
+                            </p>
+                        </a>
+                    </li>
                 <li class="nav-header">REFERENSI</li>
                 @if (auth()->user()->hasRole('admin'))
                 <li class="nav-item">

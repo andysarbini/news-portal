@@ -31,15 +31,6 @@ class ArticleController extends Controller
             ->when($request->has('status') && $request->status != "", function ($query) use ($request) {
                 $query->where('status', $request->status);
             })
-            // ->when(
-            //     $request->has('start_date') && 
-            //     $request->start_date != "" && 
-            //     $request->has('end_date') && 
-            //     $request->end_date != "", 
-            //     function ($query) use ($request) {
-            //         $query->whereBetween('publish_date', $request->only('start_date', 'end_date'));
-            //     }
-            // )
             ->orderBy('publish_date', 'desc');
             return datatables($query)
             ->addIndexColumn()
@@ -62,16 +53,10 @@ class ArticleController extends Controller
                 $text = '
                     <a href="'. route('article.show', $query->id) .'" class="btn btn-link text-dark"><i class="fas fa-search-plus"></i></a>
                 ';
-
-                if (auth()->user()->hasRole('author')) {
-                    $text .= '
-                        <a href="'. url('/article/'. $query->id .'/edit') .'" class="btn btn-link text-primary"><i class="fas fa-pencil-alt"></i></a>
-                    ';
-                } else {
-                    $text .= '
-                        <button onclick="editForm(`'. route('article.show', $query->id) .'`)" class="btn btn-link text-primary"><i class="fas fa-pencil-alt"></i></button>
-                    ';
-                }
+              
+                $text .= '
+                    <button onclick="editForm(`'. route('article.show', $query->id) .'`)" class="btn btn-link text-primary"><i class="fas fa-pencil-alt"></i></button>
+                ';
 
                 $text .= '
                     <button class="btn btn-link text-danger" onclick="deleteData(`'. route('article.destroy', $query->id) .'`)"><i class="fas fa-trash-alt"></i></button>
@@ -141,9 +126,6 @@ class ArticleController extends Controller
             return view('article.show', compact('article'));
         }
 
-        // $article->publish_date = date('Y-m-d H:i', strtotime($article->publish_date));
-        // $article->end_date = date('Y-m-d H:i', strtotime($article->end_date));
-        // $article->goal = format_uang($article->goal);
         $article->categories = $article->category_article;
         $article->path_image = Storage::disk('public')->url($article->image);
 
@@ -160,7 +142,7 @@ class ArticleController extends Controller
     public function update(Request $request, Article $article)
     {
         $rules = [
-            'image' => 'required|mimes:png,jpg,jpeg|max:2048',
+            'path_image' => 'required|mimes:png,jpg,jpeg|max:2048',
             'title' => 'required|min:8',
             'slug' => 'required|min:8',
             'short_description' => 'required',
@@ -169,19 +151,15 @@ class ArticleController extends Controller
             'category' => 'required'
         ];
 
-        if (auth()->user()->hasRole('author')) {
-            $rules['status'] = 'nullable';
-        }
-
-        $data = $request->except('path_image', 'categories');
+        $data = $request->except('path_image');
         $data['slug'] = Str::slug($request->title);
 
-        if ($request->hasFile('image')) {
+        if ($request->hasFile('path_image')) {
             if (Storage::disk('public')->exists($article->image)) {
                 Storage::disk('public')->delete($article->image);
             }
 
-            $data['image'] = upload('article', $request->file('image'), 'article');
+            $data['image'] = upload('article', $request->file('path_image'), 'article');
         }
 
         $article->update($data);

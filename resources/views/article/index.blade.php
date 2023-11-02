@@ -11,10 +11,10 @@
     <div class="col-lg-12">
         <x-card>
             <x-slot name="header">
-                @if (auth()->user()->hasRole('admin'))
-                <button onclick="addForm(`{{ route('article.store') }}`)" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Tambah</button>
+                @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('author'))
+                    <button onclick="addForm(`{{ route('article.store') }}`)" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Tambah</button>
                 @else
-                <a href="{{ url('/article') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Tambah</a>
+                    <a href="{{ url('/article') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Tambah</a>
                 @endif
             </x-slot>
 
@@ -87,9 +87,7 @@
         ajax: {
             url: '{{ route('article.data') }}',
             data: function (d) {
-                d.status = $('[name=status2]').val();
-                d.start_date = $('[name=start_date2]').val();
-                d.end_date = $('[name=end_date2]').val();
+    
             }
         },
         columns: [
@@ -131,14 +129,6 @@
                 resetForm(`${modal} form`);
                 loopForm(response.data);
 
-                // let selectedCategories = [];
-                // response.data.categories.forEach(item => {
-                //     selectedCategories.push(item.id);
-                // });
-
-                // $('#categories')
-                //     .val(selectedCategories)
-                //     .trigger('change');
             })
             .fail(errors => {
                 alert('Edit Tidak dapat menampilkan data');
