@@ -4,7 +4,8 @@ use App\Http\Controllers\{
     ArticleController,
     DashboardController,
     SettingController,
-    CategoryController
+    CategoryController,
+    GalleryController
 };
 use Illuminate\Support\Facades\Route;
 
@@ -50,8 +51,10 @@ Route::group([
         Route::get('/article/data', [ArticleController::class, 'data'])
             ->name('article.data');
         Route::resource('/article', ArticleController::class);
-        Route::put('/article/{id}/update_status', [ArticleController::class, 'updateStatus'])
-            ->name('article.update_status');
+        Route::get('/gallery/data', [GalleryController::class, 'data'])
+            ->name('gallery.data');
+        Route::resource('/gallery', GalleryController::class);
+        
     
     Route::group([
         'middleware' => 'role:author'
