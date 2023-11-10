@@ -54,7 +54,7 @@
         columns: [
             {data: 'DT_RowIndex', searchable: false, sortable: false},
             {data: 'image', searchable: false, sortable: false},
-            {data: 'judul', searchable: false, sortable: false},
+            {data: 'judul'},
             {data: 'deskripsi', searchable: false, sortable: false},
             {data: 'action', searchable: false, sortable: false},
         ]

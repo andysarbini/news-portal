@@ -5,7 +5,8 @@ use App\Http\Controllers\{
     DashboardController,
     SettingController,
     CategoryController,
-    GalleryController
+    GalleryController,
+    UserProfileInformationController
 };
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +40,8 @@ Route::group([
 ], function() {
     Route::get('/dashboard', [DashboardController::class, 'index'])
     ->name('dashboard');
+    Route::get('/user/profile', [UserProfileInformationController::class, 'show'])
+    ->name('profile.show');
 
     Route::group([
         'middleware' => 'role:admin'
@@ -54,7 +57,7 @@ Route::group([
         Route::get('/gallery/data', [GalleryController::class, 'data'])
             ->name('gallery.data');
         Route::resource('/gallery', GalleryController::class);
-        
+       
     
     Route::group([
         'middleware' => 'role:author'

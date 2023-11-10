@@ -47,7 +47,7 @@ class GalleryController extends Controller
 
                 return $text;
             })
-            ->rawColumns([])
+            ->rawColumns(['title'])
             ->escapeColumns([])
             ->make(true);
     }
