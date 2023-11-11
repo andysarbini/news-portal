@@ -31,12 +31,12 @@
     <!-- ./col -->
     <div class="col-lg-3 col-6">
         <!-- small box -->
-        <div class="small-box bg-info">
+        <div class="small-box bg-success">
             <div class="inner">
                 {{-- <h3>{{ format_uang($jumlahProjek) }}</h3> --}}
                 <h3>30</h3>
 
-                <p>Projek</p>
+                <p>Artikel</p>
             </div>
             <div class="icon">
                 <i class="fas fa-folder"></i>
@@ -48,12 +48,12 @@
     <!-- ./col -->
     <div class="col-lg-3 col-6">
         <!-- small box -->
-        <div class="small-box bg-danger">
+        <div class="small-box bg-warning">
             <div class="inner">
                 {{-- <h3>{{ format_uang($jumlahProjekPending) }}</h3> --}}
                 <h3>34</h3>
 
-                <p>Projek Pending</p>
+                <p>Gallery</p>
             </div>
             <div class="icon">
                 <i class="fas fa-folder"></i>
@@ -81,76 +81,6 @@
     <!-- ./col -->
 </div>
 
-<div class="row">
-    <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-success">
-            <div class="inner">
-                {{-- <h3>Rp. {{ format_uang($totalDonasi) }}</h3> --}}
-                <h3>50</h3>
-
-                <p>Total Donasi</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-donate"></i>
-            </div>
-            {{-- <a href="{{ route('donation.index', ['status' => 'confirmed']) }}" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a> --}}
-            <a href="" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-    <!-- ./col -->
-    <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-danger">
-            <div class="inner">
-                {{-- <h3>{{ format_uang($jumlahDonasiBelumDikonfirmasi) }}</h3> --}}
-                <h3>89</h3>
-
-                <p>Donasi Belum Dikonfirmasi</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-donate"></i>
-            </div>
-            {{-- <a href="{{ route('donation.index', ['status' => 'not confirmed']) }}" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a> --}}
-            <a href="" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-    <!-- ./col -->
-    <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-primary">
-            <div class="inner">
-                {{-- <h3>{{ format_uang($jumlahDonasiDikonfirmasi) }}</h3> --}}
-                <h3>78</h3>
-
-                <p>Donasi Dikonfirmasi</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-donate"></i>
-            </div>
-            {{-- <a href="{{ route('donation.index', ['status' => 'confirmed']) }}" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a> --}}
-            <a href="" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-    <!-- ./col -->
-    <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-success">
-            <div class="inner">
-                {{-- <h3>Rp. {{ format_uang($totalProjekDicairkan) }}</h3> --}}
-                <h3>Rp. 200</h3>
-
-                <p>Total Dicairkan</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-hand-holding-usd"></i>
-            </div>
-            {{-- <a href="{{ route('cashout.index', ['status' => 'success']) }}" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a> --}}
-            <a href="" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-    <!-- ./col -->
-</div>
 
 <!-- /.row -->
 <div class="row">
