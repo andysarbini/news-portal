@@ -72,9 +72,7 @@
 
 <x-toast />
 @includeIf('includes.datatable')
-@includeIf('includes.select2')
 @includeIf('includes.summernote')
-@includeIf('includes.datepicker')
 
 @push('scripts')
 <script>

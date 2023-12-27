@@ -18,7 +18,7 @@
         <div class="small-box bg-info">
             <div class="inner">
                 {{-- <h3>{{ format_uang($jumlahKategori) }}</h3> --}}
-                <h3>40</h3>
+                <h3>{{ $jumlahKategori }}</h3>
 
                 <p>Kategori</p>
             </div>
@@ -34,15 +34,14 @@
         <div class="small-box bg-success">
             <div class="inner">
                 {{-- <h3>{{ format_uang($jumlahProjek) }}</h3> --}}
-                <h3>30</h3>
+                <h3>{{ $jumlahArtikel }}</h3>
 
                 <p>Artikel</p>
             </div>
             <div class="icon">
                 <i class="fas fa-folder"></i>
             </div>
-            {{-- <a href="{{ route('campaign.index') }}" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a> --}}
-            <a href="" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="{{ route('article.index') }}" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <!-- ./col -->
@@ -51,14 +50,14 @@
         <div class="small-box bg-warning">
             <div class="inner">
                 {{-- <h3>{{ format_uang($jumlahProjekPending) }}</h3> --}}
-                <h3>34</h3>
+                <h3>{{ $jumlahGambar }}</h3>
 
                 <p>Gallery</p>
             </div>
             <div class="icon">
                 <i class="fas fa-folder"></i>
             </div>
-            <a href="" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="{{ route('gallery.index') }}" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <!-- ./col -->

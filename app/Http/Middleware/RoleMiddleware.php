@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 
 class RoleMiddleware
+
 {
     /**
      * Handle an incoming request.
@@ -22,6 +23,6 @@ class RoleMiddleware
             return $next($request);
         }
 
-        return redirect()->route('dashboard');
+        return redirect()->route('admin/dashboard');
     }
 }

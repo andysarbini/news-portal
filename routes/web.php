@@ -8,6 +8,12 @@ use App\Http\Controllers\{
     GalleryController,
     UserProfileInformationController
 };
+
+use App\Http\Controllers\Front\{
+    FrontController,
+    ArticleController as FrontArticleController
+};
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,9 +27,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/', [FrontController::class, 'index']);
+Route::get('/article/{id}', [FrontController::class, 'showArticle']);
+Route::get('/donation/{id}', [FrontDonationController::class, 'show']);
 
 // Route::middleware([
 //     'auth:sanctum',
@@ -36,10 +45,15 @@ Route::get('/', function () {
 // });
 
 Route::group([
-    'middleware' => ['auth', 'role:admin,author']
+    'middleware' => ['auth', 'role:admin,author'],
+    'prefix' => 'admin'
 ], function() {
+    Route::get('/', function () {
+        return redirect()->route('dashboard');
+    });
     Route::get('/dashboard', [DashboardController::class, 'index'])
     ->name('dashboard');
+    
     Route::get('/user/profile', [UserProfileInformationController::class, 'show'])
     ->name('profile.show');
 
@@ -54,6 +68,7 @@ Route::group([
         Route::get('/article/data', [ArticleController::class, 'data'])
             ->name('article.data');
         Route::resource('/article', ArticleController::class);
+
         Route::get('/gallery/data', [GalleryController::class, 'data'])
             ->name('gallery.data');
         Route::resource('/gallery', GalleryController::class);
